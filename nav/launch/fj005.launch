@@ -1,0 +1,9 @@
+<launch>
+    <node pkg="nav" type="fj005" name="fj005" output="screen">
+        <param name="basic_config" type="string" value="$(find nav)/config/basic_config.yaml" />
+        <param name="force_start" type="bool" value="false" />
+    </node>
+    <node pkg="nav" type="camera" name="camera" />
+
+
+</launch>
