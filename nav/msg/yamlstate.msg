@@ -1,3 +1,0 @@
-bool is_close
-
-
