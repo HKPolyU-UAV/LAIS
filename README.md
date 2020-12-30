@@ -2,8 +2,8 @@
 ## Learning-based Autonomous Inspection UAV System
 LAIS is a learning-based automonous inspection system developed for quadrotor platform.
 ### Video
-[![LAIS Demo](https://j.gifs.com/lxBgzg.gif)](https://www.youtube.com/watch?v=OKSm8_4rhzU)
 
+[![LAIS Demo](https://j.gifs.com/lxBgzg.gif)](https://www.youtube.com/watch?v=OKSm8_4rhzU)
 
 ### Requirements
 * **Ubuntu 16.04 or 18.04**
