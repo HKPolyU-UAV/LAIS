@@ -34,25 +34,33 @@ catkin_make
 
 ### How to use (to detect objects in our experiment)
 1. Download the pretrained weight file [Yolov4.weight](https://drive.google.com/file/d/1yJNK_knUa5nMmq-85mgNHjUg6-WzYIfj/view?usp=sharing) [Yolov4.cfg](https://drive.google.com/file/d/1PgXbc63EkwIB3KO_2TWK-IK50g81r7g-/view?usp=sharing) and [obj.names](https://drive.google.com/file/d/1oBB9okRyAmfumOJo8-RkzY6Cc_wxAKrH/view?usp=sharing)
-2. Modify the global variable in `~/catkin_ws/src/LAIS/src/camera.cpp`:
+2. Change these lines:   
+[cfg_path](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L48)  
+[weight_path](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L49)  
+[classid_path](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L50)  
 ```c++
 static string cfg_path
 static string weight_path
 static string classid_path
-```
-
+```  
 3. Compile and launch `camera` node:
 ```
 cd ~/catkin_ws
 catkin_make
 rosrun LAIS camera
 ```
-4. To visualize the detected object in inertial frame, launch `rviz` node:
+4. To visualize 2-D bounding boxes, uncomment the line [drawBoundingBox](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L292)
+```c++
+yolo.drawBoundingBox(image_rgb);
+```
+
+
+5. To visualize the estimate of object position in inertial frame, launch `rviz` node:
 ```
 cd ~/catkin_ws
 roslaunch rviz.launch
 ```
-5. To improve the detection speed or accuracy, change the default input size (608) in `~/catkin_ws/src/LAIS/src/camera.cpp`:
+6. To improve the detection speed or accuracy, change the default input size in `~/catkin_ws/src/LAIS/src/camera.cpp`:
 ```c++
 static yoloNet yolo = yoloNet(cfg_path, weight_path, classid_path, 608, 608, 0.5);
 ```
