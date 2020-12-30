@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(nav)
+project(LAIS)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11 -pthread)
@@ -63,13 +63,28 @@ target_link_libraries(fj005
 
 add_executable(camera
      src/camera.cpp
-     src/utils/yoloNet.cpp)
+     src/utils/yoloNet.cpp
+     src/visualization/rviz_object.cpp)
 
 target_link_libraries(camera
      ${OpenCV_LIBRARIES}
      ${catkin_LIBRARIES}
      ${YAML_CPP_LIBRARIES})
 
+add_executable(post_processing
+    src/post_processing.cpp)
 
+target_link_libraries(post_processing
+    ${OpenCV_LIBRARIES}
+    ${catkin_LIBRARIES}
+    ${YAML_CPP_LIBRARIES}
+    ${Sophus_LIBRARIES})
 
+add_executable(virtual
+     src/virtual.cpp
+     src/utils/yoloNet.cpp)
 
+target_link_libraries(virtual
+     ${OpenCV_LIBRARIES}
+     ${catkin_LIBRARIES}
+     ${YAML_CPP_LIBRARIES})

@@ -14,9 +14,9 @@
 #include "utils/yoloNet.h"
 #include <std_msgs/String.h>
 #include <std_msgs/Int32.h>
-#include "nav/identify_command.h"
-#include "nav/object.h"
-#include "nav/Objects.h"
+#include "LAIS/identify_command.h"
+#include "LAIS/object.h"
+#include "LAIS/Objects.h"
 #include <message_filters/subscriber.h>
 #include <message_filters/time_synchronizer.h>
 #include <message_filters/sync_policies/exact_time.h>
@@ -27,6 +27,7 @@
 #include "utils/kinetic_math.h"
 #include "utils/yamlRead.h"
 #include <numeric>
+#include "visualization/rviz_object.h"
 
 using namespace std;
 using namespace sensor_msgs;
@@ -40,14 +41,14 @@ static double uav_x,uav_y,uav_z;
 static double uav_qx,uav_qy,uav_qz,uav_qw;
 static double uav_size = 0.5;
 static geometry_msgs::PoseStamped obj_pose;
-static nav::Objects Object_array;
+static LAIS::Objects Object_array;
 
 #define radius 1
 // YOLO file path
-static string cfg_path = "/home/panda/Downloads/yolov4_5_classes/yolov4_8_31.cfg";
-static string weight_path = "/home/panda/Downloads/yolov4_5_classes/yolov4_8_31_best.weights";
-static string classid_path = "/home/panda/Downloads/yolov4_5_classes/obj.names";
-static string object_save_file_path = "/home/panda/fyrws/src/nav/config/testconfig.yaml";
+static string cfg_path = "/home/sy/Downloads/yolov4_8_31.cfg";
+static string weight_path = "/home/sy/Downloads/yolov4_8_31_best.weights";
+static string classid_path = "/home/sy/Downloads/obj.names";
+static string object_save_file_path = "/home/panda/fyrws/src/LAIS/config/testconfig.yaml";
 static std::vector <string> object_class = {"bulb", "traffic light", "cctv"};
 
 //Creat the YOLO network
@@ -70,8 +71,7 @@ void camera_info_cb(const sensor_msgs::CameraInfoPtr& msg){
   cx = msg->K[2];
   cy = msg->K[5];
 }
-
-void identify_cb(const nav::identify_commandConstPtr & msg){
+void identify_cb(const LAIS::identify_commandConstPtr & msg){
 
     identify_flag = msg->identify;
 //    cout << identify_flag << endl;
@@ -168,7 +168,7 @@ inline void depth_caculate(const yoloObject_t & object, cv::Mat frame, string & 
 
     cout << endl;
 
-    obj_pose.header.frame_id = "world";
+    obj_pose.header.frame_id = "map";
     obj_pose.pose.position.x = IIR_worldframe(0,getIndex(object_class,name));
     obj_pose.pose.position.y = IIR_worldframe(1,getIndex(object_class,name));
     obj_pose.pose.position.z = IIR_worldframe(2,getIndex(object_class,name));
@@ -265,6 +265,7 @@ void callback(const sensor_msgs::CompressedImageConstPtr & rgb, const sensor_msg
   try
   {
       image_rgb = cv::imdecode(cv::Mat(rgb->data),1);
+
 //      image_dep = cv::imdecode(cv::Mat(depth->data),1);
 
   }
@@ -273,6 +274,7 @@ void callback(const sensor_msgs::CompressedImageConstPtr & rgb, const sensor_msg
       ROS_ERROR("cv_bridge exception: %s", e.what());
       return;
   }
+
   //depth_alignment call back
   cv_bridge::CvImagePtr depth_ptr  = cv_bridge::toCvCopy(depth, depth->encoding);
   cv::Mat image_dep = depth_ptr->image;
@@ -374,11 +376,11 @@ int main(int argc, char **argv)
   ros::NodeHandle nh;
   ros::Subscriber camera_info_sub = nh.subscribe("/camera/aligned_depth_to_color/camera_info",1,camera_info_cb);
   ros::Subscriber uavposlp_sub = nh.subscribe<geometry_msgs::PoseStamped>("/mavros/local_position/pose", 10, uav_lp_cb);
-  ros::Publisher objects_pub = nh.advertise<nav::Objects>("/Objects_array", 1);
+  ros::Publisher objects_pub = nh.advertise<LAIS::Objects>("/Objects_array", 1);
 
 
   ros::Publisher object_pub = nh.advertise<geometry_msgs::PoseStamped>("objectpose",1);
-  ros::Subscriber identify_sub = nh.subscribe<nav::identify_command>("/identify", 1, identify_cb);
+  ros::Subscriber identify_sub = nh.subscribe<LAIS::identify_command>("/identify", 1, identify_cb);
 
   ros::Publisher groundtruth_pub = nh.advertise <visualization_msgs::Marker>("gt_points",10);
   message_filters::Subscriber<CompressedImage> rgb_sub(nh, "/camera/color/image_raw/compressed", 1);

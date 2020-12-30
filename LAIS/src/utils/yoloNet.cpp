@@ -214,7 +214,7 @@ void yoloNet::drawBoudingBox(Mat &img)
     cv::rectangle(img, cv::Point(0, 0), cv::Point(stats_bg_sz.width, stats_bg_sz.height + 10), cv::Scalar(0, 0, 0), cv::FILLED);
     cv::putText(img, stats.c_str(), cv::Point(0, stats_bg_sz.height + 5), cv::FONT_HERSHEY_COMPLEX_SMALL, 1, cv::Scalar(255, 255, 255));
     imshow("Output of prediction", img);
-    waitKey(1);
+    waitKey(60);
   }
 }
 
