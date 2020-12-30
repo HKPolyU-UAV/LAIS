@@ -33,11 +33,11 @@ catkin_make
 ```
 
 ### How to use (to detect objects in our experiment)
-1. Download the pretrained weight file [Yolov4.weight](https://drive.google.com/file/d/1yJNK_knUa5nMmq-85mgNHjUg6-WzYIfj/view?usp=sharing) [Yolov4.cfg](https://drive.google.com/file/d/1PgXbc63EkwIB3KO_2TWK-IK50g81r7g-/view?usp=sharing) and [obj.names](https://drive.google.com/file/d/1oBB9okRyAmfumOJo8-RkzY6Cc_wxAKrH/view?usp=sharing)
-2. Change these lines:   
-[cfg_path](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L48)  
-[weight_path](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L49)  
-[classid_path](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L50)  
+1. Download [Yolov4.cfg](https://drive.google.com/file/d/1PgXbc63EkwIB3KO_2TWK-IK50g81r7g-/view?usp=sharing), [Yolov4.weight](https://drive.google.com/file/d/1yJNK_knUa5nMmq-85mgNHjUg6-WzYIfj/view?usp=sharing) and [obj.names](https://drive.google.com/file/d/1oBB9okRyAmfumOJo8-RkzY6Cc_wxAKrH/view?usp=sharing)
+2. Change these lines :   
+-[cfg_path](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L48) 
+-[weight_path](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L49)
+-[classid_path](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L50)  
 ```c++
 static string cfg_path
 static string weight_path
@@ -53,8 +53,6 @@ rosrun LAIS camera
 ```c++
 yolo.drawBoundingBox(image_rgb);
 ```
-
-
 5. To visualize the estimate of object position in inertial frame, launch `rviz` node:
 ```
 cd ~/catkin_ws
