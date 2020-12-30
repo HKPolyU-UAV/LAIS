@@ -17,12 +17,13 @@ LAIS is a learning-based automonous inspection system developed for quadrotor pl
 1. clone repository into working space
 
 ```
+cd ~/catkin_ws/src
 git clone https://github.com/JazzyFeng/LAIS.git
 ```
 
 2. Install 3rd Party library
 ``` 
-cd catkin_ws/src/LAIS/3rdPartLib/
+cd ~/catkin_ws/src/LAIS/3rdPartLib/
 ./install3rdPartLib.sh
 ```
 3. Compile 
