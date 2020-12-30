@@ -59,7 +59,6 @@ cd ~/catkin_ws
 roslaunch rviz.launch
 ```
 6. To improve the detection speed or accuracy, change the default input size [yoloNet](https://github.com/JazzyFeng/LAIS/blob/865183f2fa4a812b2babe757386963f6fe01ca40/src/camera.cpp#L55) 
-`~/catkin_ws/src/LAIS/src/camera.cpp`
 ```c++
 static yoloNet yolo = yoloNet(cfg_path, weight_path, classid_path, 608, 608, 0.5);
 ```
