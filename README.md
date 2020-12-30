@@ -35,9 +35,9 @@ catkin_make
 ### How to use (to detect objects in our experiment)
 1. Download [Yolov4.cfg](https://drive.google.com/file/d/1PgXbc63EkwIB3KO_2TWK-IK50g81r7g-/view?usp=sharing), [Yolov4.weight](https://drive.google.com/file/d/1yJNK_knUa5nMmq-85mgNHjUg6-WzYIfj/view?usp=sharing) and [obj.names](https://drive.google.com/file/d/1oBB9okRyAmfumOJo8-RkzY6Cc_wxAKrH/view?usp=sharing)
 2. Change these lines :   
--[cfg_path](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L48) 
--[weight_path](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L49)
--[classid_path](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L50)  
+- [cfg_path](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L48) 
+- [weight_path](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L49)
+- [classid_path](https://github.com/JazzyFeng/LAIS/blob/d812f84de0b30722c867bba6266525e571f5e48d/src/camera.cpp#L50)  
 ```c++
 static string cfg_path
 static string weight_path
@@ -58,7 +58,8 @@ yolo.drawBoundingBox(image_rgb);
 cd ~/catkin_ws
 roslaunch rviz.launch
 ```
-6. To improve the detection speed or accuracy, change the default input size in `~/catkin_ws/src/LAIS/src/camera.cpp`:
+6. To improve the detection speed or accuracy, change the default input size [yoloNet](https://github.com/JazzyFeng/LAIS/blob/865183f2fa4a812b2babe757386963f6fe01ca40/src/camera.cpp#L55) 
+`~/catkin_ws/src/LAIS/src/camera.cpp`
 ```c++
 static yoloNet yolo = yoloNet(cfg_path, weight_path, classid_path, 608, 608, 0.5);
 ```
