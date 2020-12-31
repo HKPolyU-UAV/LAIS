@@ -1,9 +1,18 @@
 # LAIS
 ## Learning-based Autonomous Inspection UAV System
-LAIS is a learning-based automonous inspection system developed for quadrotor platform. In this work, it consists of 2-D object detector, 3-D object state estimation and path planning. THe 2-D object detector support [YOLO series](https://github.com/AlexeyAB/darknet). The 3-D object state estimation  and flight trajectory can be visualized by Rviz in real-time.
+LAIS is a learning-based automonous inspection system developed for quadrotor platform. In this work, it consists of 2-D object detector, 3-D object state estimation and path planning. THe 2-D object detector support [YOLO series](https://github.com/AlexeyAB/darknet). The 3-D object state estimation  and flight trajectory can be visualized by Rviz in real-time. 
+
+<p align = "center">
+<img src="/others/2.gif" width = "413" height = "232" border="5" />
+<img src="/others/3.gif" width = "413" height = "232" border="5" />
+
+</p>
+
 ### Video
 
 [![LAIS Demo](/others/1.gif)](https://www.youtube.com/watch?v=OKSm8_4rhzU)
+
+
 
 ### Requirements
 * **Ubuntu 16.04 or 18.04**
