@@ -12,6 +12,8 @@ LAIS is a learning-based automonous inspection system developed for quadrotor pl
 
 [![LAIS Demo](/others/1.gif)](https://www.youtube.com/watch?v=OKSm8_4rhzU)
 
+### Publications
+[Feng, Y., Tse, K., Chen, S., Wen, C. Y., & Li, B. (2021). Learning-Based Autonomous UAV System for Electrical and Mechanical (E&M) Device Inspection. Sensors, 21(4), 1385.](https://www.mdpi.com/1424-8220/21/4/1385)
 
 
 ### Requirements
